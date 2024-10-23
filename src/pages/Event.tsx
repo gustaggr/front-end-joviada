@@ -51,11 +51,11 @@ const Event: React.FC = () => {
         <div className="max-lg:hidden relative h-[30rem] w-full flex items-center justify-center overflow-hidden">
           <div
             className="absolute h-72 z-0 inset-0 bg-cover bg-center filter blur-sm scale-110 opacity-100"
-            style={{ backgroundImage: `url('/public/Frame 1.png')` }}
+            style={{ backgroundImage: `url('https://i.imgur.com/Syf3eFh.png')` }}
           ></div>
           <div className="relative w-screen items-center justify-center flex">
             <img
-              src="/public/Frame 1.png"
+              src="https://i.imgur.com/Syf3eFh.png"
               alt="Retiro"
               className="rounded-lg w-3/4 h-80 object-cover"
             />
@@ -64,7 +64,7 @@ const Event: React.FC = () => {
 
         <div className="relative w-screen items-center justify-center lg:hidden flex">
           <img
-            src="/public/Frame 1.png"
+            src="https://i.imgur.com/Syf3eFh.png"
             alt="Retiro"
             className="w-screen max-h-64 h-full rounded-b-lg object-cover"
           />
