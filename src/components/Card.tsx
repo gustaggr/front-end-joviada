@@ -1,4 +1,5 @@
 import { IoLocationOutline } from "react-icons/io5";
+import { Link } from "react-router-dom"; // Importar Link
 
 interface CardProps {
     date: {
@@ -19,7 +20,10 @@ export default function Card({
     image,
 }: CardProps) {
     return (
-        <a href="event" className="w-[284px] h-full bg-backgroundClear flex flex-col rounded-2xl shadow-black shadow-md backdrop-blur-xl">
+        <Link 
+            to="/event" 
+            className="w-[284px] h-full bg-backgroundClear flex flex-col rounded-2xl shadow-black shadow-md backdrop-blur-xl"
+        >
             <img
                 src={image}
                 alt="Logo"
@@ -47,6 +51,6 @@ export default function Card({
                     </div>
                 </div>
             </div>
-        </a>
+        </Link>
     );
 }

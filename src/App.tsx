@@ -1,19 +1,21 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Event from './pages/Event';
-import Home from './pages/Home';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
+
+// Lazy Loading das páginas
+const Home = lazy(() => import('./pages/Home'));
+const Event = lazy(() => import('./pages/Event'));
 
 function App() {
-
   return (
-    <div className='font-inter'>
-      <Router>
+    <BrowserRouter>
+      <Suspense fallback={<div>Carregando...</div>}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/event" element={<Event />} />
         </Routes>
-      </Router>
-    </div>
+      </Suspense>
+    </BrowserRouter>
   );
 }
 
-export default App
+export default App;
