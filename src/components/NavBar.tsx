@@ -1,21 +1,22 @@
 import { IoHomeOutline, IoPersonOutline, IoTicketOutline } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 export default function NavBar() {
     
     return (
         <>
-            <div className="w-screen z-10 bg-backgroundClear h-16 items-center justify-center flex px-20">
-                <div className="text-white w-full items-center justify-between flex xl:p-10 xl:w-[1200px]">
+            <div className="w-screen z-10 bg-backgroundClear h-16 items-center justify-center flex px-5">
+                <div className="text-black w-full items-center justify-between flex max-w-[1200px]">
                     <div>
-                        <h1 className="font-bold text-white text-xl">Joviada Coro</h1>
+                        <Link to={'/'} className="font-bold text-black text-xl">Joviada Coro</Link>
                     </div>
                     <div className="gap-4 items-center font-medium text-base hidden sm:flex">
-                        <a className="">Registrar</a>
-                        <a className="bg-primary p-2 rounded-lg">Entrar</a>
+                        <Link to={"/register"} className="text-primary">Registrar</Link>
+                        <Link to={"/login"} className="bg-primary p-2 text-white rounded-lg">Entrar</Link>
                     </div>
                 </div>
             </div>
-            <div className="w-full z-10 bg-backgroundClear h-16 fixed bottom-0 left-0 flex sm:hidden items-center justify-around text-white">
+            <div className="w-full z-10 bg-backgroundClear h-16 fixed bottom-0 left-0 flex sm:hidden items-center justify-around text-black">
                 <a className="flex flex-col items-center">
                     <IoHomeOutline size={'30px'} />
                     <span className="text-xs">Inicio</span>

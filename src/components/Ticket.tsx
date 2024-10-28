@@ -28,23 +28,24 @@ export default function Ticket({ name, allotment, value, onChange }: TicketProps
 
   return (
     <>
-      <div className="justify-between w-full flex">
+      <div className="justify-between w-full flex ">
         <div className="justify-start flex flex-col p-6 w-full">
-          <h1 className="text-white font-semibold text-lg">{name}</h1>
+          <h1 className="text-black font-semibold text-lg">{name}</h1>
           <h1 className="text-slate-400 font-light">{allotment}</h1>
-          <h1 className="text-white mt-2 font-light">R$ {value.toFixed(2)}</h1>
+          <h1 className="text-black mt-2 font-light">R$ {value.toFixed(2)}</h1>
         </div>
         <div className="justify-center flex p-6 gap-2 items-center">
           <div className="text-primary text-2xl cursor-pointer" onClick={decrement}>
             <IoRemoveCircle />
           </div>
-          <h1 className="text-white text-2xl">{quantity}</h1>
+          <h1 className="text-black text-2xl">{quantity}</h1>
           <div className="text-primary text-2xl cursor-pointer" onClick={increment}>
             <IoIosAddCircle />
           </div>
         </div>
+
       </div>
-      <div className="border-t-2 border-dashed border-white w-full"></div>
+      <div className="border-t-2 border-dashed border-slate-300 w-full"></div>
     </>
   );
 }

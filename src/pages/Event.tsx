@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import NavBar from '../components/NavBar';
 import { IoCalendarClearOutline, IoLocationOutline } from 'react-icons/io5';
 import Ticket from '../components/Ticket';
 import { CiShoppingCart } from 'react-icons/ci';
+import { Link } from 'react-router-dom';
 
 interface Coupon {
   code: string;
@@ -16,17 +17,17 @@ const coupons: Coupon[] = [
 ];
 
 const Event: React.FC = () => {
+  const [isFocused, setIsFocused] = useState(false);
   const [total, setTotal] = useState<number>(0);
   const [discountedTotal, setDiscountedTotal] = useState<number>(0);
+  const [ticketCount, setTicketCount] = useState<number>(0); // Novo estado para quantidade de ingressos
   const [couponInput, setCouponInput] = useState<string>(''); // Cupom inserido pelo usuário
   const [appliedCoupon, setAppliedCoupon] = useState<Coupon | null>(null); // Cupom aplicado
 
   const handleTicketChange = (amount: number, value: number) => {
     const newTotal = total + amount * value;
     setTotal(newTotal);
-    setDiscountedTotal(
-      appliedCoupon ? newTotal * (1 - appliedCoupon.discount / 100) : newTotal
-    );
+    setTicketCount(ticketCount + amount); // Atualiza a contagem de ingressos
   };
 
   const applyCoupon = () => {
@@ -43,6 +44,14 @@ const Event: React.FC = () => {
       setDiscountedTotal(total); // Restaura o total original
     }
   };
+
+  useEffect(() => {
+    if (appliedCoupon) {
+      setDiscountedTotal(total * (1 - appliedCoupon.discount / 100));
+    } else {
+      setDiscountedTotal(total);
+    }
+  }, [total, appliedCoupon]);
 
   return (
     <div className="min-h-screen bg-background flex flex-col overflow-hidden">
@@ -70,20 +79,20 @@ const Event: React.FC = () => {
           />
         </div>
 
-        <div className="w-3/4 max-lg:py-6 flex max-lg:flex-col h-full lg:px-6 mb-20">
+        <div className="w-3/4 max-lg:py-6 gap-5 flex max-lg:flex-col h-full lg:px-6 mb-20">
           <div className="lg:w-2/3 flex flex-col">
-            <h1 className="text-white font-bold text-3xl">Retiro de Jovens</h1>
-            <div className="text-white font-light mt-2 items-center text-base flex gap-2 uppercase">
+            <h1 className="text-black font-bold text-3xl">Retiro de Jovens</h1>
+            <div className="text-black font-light mt-2 items-center text-base flex gap-2 uppercase">
               <IoCalendarClearOutline />
               <span>1 de março de 2024, 16:00</span>
               <div className="w-5 h-[2px] bg-white"></div>
               <span>4 de março de 2024, 12:00</span>
             </div>
-            <div className="text-white font-light mt-2 items-center text-base flex gap-2 uppercase">
+            <div className="text-black font-light mt-2 items-center text-base flex gap-2 uppercase">
               <IoLocationOutline />
               <span>clube campestre</span>
             </div>
-            <div className="flex flex-col text-white mt-4 overflow-hidden">
+            <div className="flex flex-col text-black mt-4 overflow-hidden">
               <p>
                 Prepare-se para um encontro transformador com Deus e uma experiência inesquecível!
                 O Retiro de Jovens 2024 será um tempo de renovação espiritual, comunhão, e momentos
@@ -100,43 +109,49 @@ const Event: React.FC = () => {
             </div>
           </div>
 
-          <div className="lg:w-1/3 mt-10 lg:mt-0 w-full ml-4 bg-backgroundClear rounded-xl flex flex-col">
+          <div className="lg:w-1/3 mt-10 max-lg:ml-0 w-full lg:ml-0 ml-4 bg-backgroundClear rounded-xl flex flex-col shadow-slate-400 shadow-md backdrop-blur-sm">
             <Ticket
               name="Inscrição Geral - Meia (PIX)"
               allotment="1º Lote"
               value={125}
               onChange={handleTicketChange}
             />
-            <Ticket
-              name="Inscrição Geral - Meia (CARTÃO)"
-              allotment="1º Lote"
-              value={140}
-              onChange={handleTicketChange}
-            />
-            <Ticket
-              name="Inscrição Geral - Inteira (PIX)"
-              allotment="1º Lote"
-              value={250}
-              onChange={handleTicketChange}
-            />
-            <Ticket
-              name="Inscrição Geral - Inteira (CARTÃO)"
-              allotment="1º Lote"
-              value={270}
-              onChange={handleTicketChange}
-            />
+            <div className="flex items-center justify-between p-6 gap-2">
+              <div>
+                <h1 className="font-semibold text-xl">Total</h1>
+                <h2 className="font-thin">{ticketCount} ingressos</h2> {/* Exibe a quantidade de ingressos */}
+              </div>
+              <div className="flex flex-col items-end">
+                <h1 className="text-black font-light text-xl">
+                  R$ {discountedTotal.toFixed(2)}
+                </h1>
 
-            <div className="flex flex-col p-4 gap-2">
-              <h1 className="text-white">Código Promocional</h1>
-              <div className="flex gap-4 w-full">
+                {appliedCoupon && (
+                  <h1 className="text-primary text-center font-semibold">
+                    {appliedCoupon.discount}%
+                  </h1>
+                )}
+              </div>
+            </div>
+
+            <div className="border-t-2 border-dashed mt-2 border-slate-300 w-full"></div>
+
+            <div className="flex flex-col px-6 py-4 gap-4">
+              <h1 className="text-black">Possui um cupom de desconto?</h1>
+              <div
+                className={`flex gap-4 w-full items-center p-2 rounded-md bg-gray-50 border border-gray-200 ${isFocused ? 'ring-2 ring-purple-500' : ''
+                  }`}
+              >
                 <input
                   placeholder="Insira o cupom"
-                  className="w-3/4 rounded-md outline-none p-1 text-white bg-transparent border placeholder:text-slate-400 border-primary"
+                  className="flex-grow rounded-md outline-none p-1 text-gray-500 bg-transparent placeholder:text-slate-400"
                   value={couponInput}
                   onChange={(e) => setCouponInput(e.target.value)}
+                  onFocus={() => setIsFocused(true)}
+                  onBlur={() => setIsFocused(false)}
                 />
                 <button
-                  className="bg-primary w-1/4 rounded-md p-1 text-white font-semibold"
+                  className="text-purple-600 font-semibold hover:underline"
                   onClick={applyCoupon}
                 >
                   Aplicar
@@ -144,21 +159,14 @@ const Event: React.FC = () => {
               </div>
             </div>
 
-            {appliedCoupon && (
-              <h1 className="text-green-400 text-center font-semibold">
-                {appliedCoupon.code} - {appliedCoupon.discount}% de desconto
-              </h1>
-            )}
-
-            <div className="border-t-2 border-dashed border-white w-full"></div>
-            <div className="flex flex-col items-center gap-2 justify-center p-4">
-              <div className="flex items-center justify-center gap-2">
-                <CiShoppingCart className="text-green-600 " size={40} />
-                <h1 className="text-white font-light text-xl">
-                  R$ {discountedTotal.toFixed(2)}
-                </h1>
-              </div>
-              <button className="bg-green-600 text-white rounded-md text-xl p-1">Finalizar</button>
+            <div className="flex items-center justify-between p-6">
+            <Link
+                to={'/order'}
+                className={`items-center flex justify-center rounded-md text-xl w-full py-2 p-1 ${ticketCount === 0 ? 'bg-gray-300 text-white cursor-not-allowed' : 'bg-primary text-white'}`}
+                style={{ pointerEvents: ticketCount === 0 ? 'none' : 'auto' }}
+              >
+                Comprar ingressos
+              </Link>
             </div>
           </div>
         </div>

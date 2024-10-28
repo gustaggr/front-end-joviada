@@ -9,9 +9,9 @@ module.exports = {
         inter: ['Inter', 'sans-serif'],
       },
       colors: {
-        primary: '#FF8000',
-        backgroundClear: '#1D1D41',
-        background: '#141332',
+        primary: '#7202DF',
+        backgroundClear: '#ffffff',
+        background: '#EFEFEF',
       },
     },
   },
