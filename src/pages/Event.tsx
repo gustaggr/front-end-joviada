@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import NavBar from '../components/NavBar';
 import { IoCalendarClearOutline, IoLocationOutline } from 'react-icons/io5';
 import Ticket from '../components/Ticket';
-import { CiShoppingCart } from 'react-icons/ci';
 import { Link } from 'react-router-dom';
 
 interface Coupon {
@@ -60,7 +59,7 @@ const Event: React.FC = () => {
         <div className="max-lg:hidden relative h-[30rem] w-full flex items-center justify-center overflow-hidden">
           <div
             className="absolute h-72 z-0 inset-0 bg-cover bg-center filter blur-sm scale-110 opacity-100"
-            style={{ backgroundImage: `url('https://i.imgur.com/Syf3eFh.png')` }}
+            style={{ backgroundImage: 'url(https://i.imgur.com/Syf3eFh.png)' }}
           ></div>
           <div className="relative w-screen items-center justify-center flex">
             <img
@@ -111,9 +110,15 @@ const Event: React.FC = () => {
 
           <div className="lg:w-1/3 mt-10 max-lg:ml-0 w-full lg:ml-0 ml-4 bg-backgroundClear rounded-xl flex flex-col shadow-slate-400 shadow-md backdrop-blur-sm">
             <Ticket
-              name="Inscrição Geral - Meia (PIX)"
+              name="Inscrição Geral - Meia"
               allotment="1º Lote"
               value={125}
+              onChange={handleTicketChange}
+            />
+            <Ticket
+              name="Inscrição Geral - Inteira"
+              allotment="1º Lote"
+              value={250}
               onChange={handleTicketChange}
             />
             <div className="flex items-center justify-between p-6 gap-2">
@@ -139,8 +144,7 @@ const Event: React.FC = () => {
             <div className="flex flex-col px-6 py-4 gap-4">
               <h1 className="text-black">Possui um cupom de desconto?</h1>
               <div
-                className={`flex gap-4 w-full items-center p-2 rounded-md bg-gray-50 border border-gray-200 ${isFocused ? 'ring-2 ring-purple-500' : ''
-                  }`}
+                className={`flex gap-4 w-full items-center p-2 rounded-md bg-gray-50 border border-gray-200 ${isFocused ? 'ring-2 ring-purple-500' : ''}`}
               >
                 <input
                   placeholder="Insira o cupom"
@@ -160,7 +164,7 @@ const Event: React.FC = () => {
             </div>
 
             <div className="flex items-center justify-between p-6">
-            <Link
+              <Link
                 to={'/order'}
                 className={`items-center flex justify-center rounded-md text-xl w-full py-2 p-1 ${ticketCount === 0 ? 'bg-gray-300 text-white cursor-not-allowed' : 'bg-primary text-white'}`}
                 style={{ pointerEvents: ticketCount === 0 ? 'none' : 'auto' }}

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 const Order: React.FC = () => {
     const [timeLeft, setTimeLeft] = useState(2 * 60); // 15 minutos em segundos
+    const [phone, setPhone] = useState("");
 
     useEffect(() => {
         if (timeLeft <= 0) return; // Interrompe o cronômetro ao chegar a 0
@@ -15,6 +16,19 @@ const Order: React.FC = () => {
 
         return () => clearInterval(intervalId); // Limpa o intervalo ao desmontar o componente
     }, [timeLeft]);
+
+    const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        let value = e.target.value.replace(/\D/g, ""); // Remove tudo que não é número
+
+        if (value.length > 0) {
+            value = `(${value.substring(0, 2)}) ` + value.substring(2);
+        }
+        if (value.length > 10) {
+            value = value.substring(0, 10) + "-" + value.substring(10, 14);
+        }
+
+        setPhone(value);
+    };
 
     const formatTime = (seconds: number) => {
         const minutes = Math.floor(seconds / 60);
@@ -57,7 +71,7 @@ const Order: React.FC = () => {
                                 <input
                                     disabled
                                     type="text"
-                                    className="w-full text-lg p-2 bg-gray-300 rounded-xl outline-none placeholder:text-black text-black"
+                                    className="w-full text-lg p-2 bg-gray-300 rounded-xl outline-none placeholder:text-slate-400"
                                     placeholder="gustavo@gmail.com"
                                 />
                             </div>
@@ -68,7 +82,7 @@ const Order: React.FC = () => {
                                 <input
                                     disabled
                                     type="text"
-                                    className="w-full text-lg p-2 bg-gray-300 rounded-xl outline-none placeholder:text-black text-black"
+                                    className="w-full text-lg p-2 bg-gray-300 rounded-xl outline-none placeholder:text-slate-400"
                                     placeholder="gustavo@gmail.com"
                                 />
                             </div>
@@ -81,7 +95,7 @@ const Order: React.FC = () => {
                                 <input
                                     disabled
                                     type="text"
-                                    className="w-full text-lg p-2 bg-gray-300 rounded-xl outline-none placeholder:text-black text-black"
+                                    className="w-full text-lg p-2 bg-gray-300 rounded-xl outline-none placeholder:text-slate-400"
                                     placeholder="John"
                                 />
                             </div>
@@ -91,7 +105,7 @@ const Order: React.FC = () => {
                                 </h2>
                                 <input
                                     type="text"
-                                    className="w-full text-lg p-2 bg-gray-300 rounded-xl outline-none placeholder:text-black text-black"
+                                    className="w-full text-lg p-2 bg-gray-300 rounded-xl outline-none placeholder:text-slate-400"
                                     placeholder="Doe"
                                 />
                             </div>
@@ -153,6 +167,8 @@ const Order: React.FC = () => {
                                     type="text"
                                     className="w-full text-lg p-2 bg-background rounded-xl outline-none placeholder:text-slate-600 text-black"
                                     placeholder="(34) 9xxxx-xxxx"
+                                    value={phone}
+                                    onChange={handlePhoneChange}
                                 />
                             </div>
                             <div className="flex flex-col gap-2 sm:w-1/2">
