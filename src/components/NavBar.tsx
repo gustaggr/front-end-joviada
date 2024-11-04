@@ -8,7 +8,7 @@ export default function NavBar() {
             <div className="w-screen z-10 bg-backgroundClear h-16 items-center justify-center flex px-5">
                 <div className="text-black w-full items-center justify-between flex max-w-[1200px]">
                     <div>
-                        <Link to={'/'} className="font-bold text-black text-xl">Joviada Coro</Link>
+                        <Link to={'/'} className="font-bold text-black text-xl"><img className="w-52" src='../../public/namelogo.svg'/></Link>
                     </div>
                     <div className="gap-4 items-center font-medium text-base hidden sm:flex">
                         <Link to={"/register"} className="text-primary">Registrar</Link>

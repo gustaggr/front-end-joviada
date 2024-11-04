@@ -144,11 +144,11 @@ const Event: React.FC = () => {
             <div className="flex flex-col px-6 py-4 gap-4">
               <h1 className="text-black">Possui um cupom de desconto?</h1>
               <div
-                className={`flex gap-4 w-full items-center p-2 rounded-md bg-gray-50 border border-gray-200 ${isFocused ? 'ring-2 ring-purple-500' : ''}`}
+                className={`flex w-full items-center p-2 justify-between rounded-md bg-gray-50 border border-gray-200 ${isFocused ? 'ring-2 ring-purple-500' : ''}`}
               >
                 <input
                   placeholder="Insira o cupom"
-                  className="flex-grow rounded-md outline-none p-1 text-gray-500 bg-transparent placeholder:text-slate-400"
+                  className="flex-grow w-full rounded-md outline-none p-1 text-gray-500 bg-transparent placeholder:text-slate-400"
                   value={couponInput}
                   onChange={(e) => setCouponInput(e.target.value)}
                   onFocus={() => setIsFocused(true)}
