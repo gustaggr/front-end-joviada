@@ -15,6 +15,8 @@ const coupons: Coupon[] = [
   { code: '10OFF', discount: 10 }, // Exemplo adicional
 ];
 
+const bannerEvent = '/banner.svg';
+
 const Event: React.FC = () => {
   const [isFocused, setIsFocused] = useState(false);
   const [total, setTotal] = useState<number>(0);
@@ -59,11 +61,11 @@ const Event: React.FC = () => {
         <div className="max-lg:hidden relative h-[30rem] w-full flex items-center justify-center overflow-hidden">
           <div
             className="absolute h-72 z-0 inset-0 bg-cover bg-center filter blur-sm scale-110 opacity-100"
-            style={{ backgroundImage: 'url(https://i.imgur.com/Syf3eFh.png)' }}
+            style={{ backgroundImage: `url(${bannerEvent})` }}
           ></div>
           <div className="relative w-screen items-center justify-center flex">
             <img
-              src="https://i.imgur.com/Syf3eFh.png"
+              src={bannerEvent}
               alt="Retiro"
               className="rounded-lg w-3/4 h-80 object-cover"
             />
@@ -72,7 +74,7 @@ const Event: React.FC = () => {
 
         <div className="relative w-screen items-center justify-center lg:hidden flex">
           <img
-            src="https://i.imgur.com/Syf3eFh.png"
+            src={bannerEvent}
             alt="Retiro"
             className="w-screen max-h-64 h-full rounded-b-lg object-cover"
           />
@@ -84,7 +86,7 @@ const Event: React.FC = () => {
             <div className="text-black font-light mt-2 items-center text-base flex gap-2 uppercase">
               <IoCalendarClearOutline />
               <span>1 de março de 2024, 16:00</span>
-              <div className="w-5 h-[2px] bg-white"></div>
+              <div className="w-5 h-[2px] bg-black"></div>
               <span>4 de março de 2024, 12:00</span>
             </div>
             <div className="text-black font-light mt-2 items-center text-base flex gap-2 uppercase">

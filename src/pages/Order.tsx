@@ -211,7 +211,7 @@ const Order: React.FC = () => {
                     </div>
                     <div className='w-full flex items-center justify-center'>
                         <Link
-                            to={'/order'}
+                            to={'/person'}
                             className={`items-center flex justify-center rounded-md text-xl w-1/2 max-sm:w-full py-2 p-1 bg-primary text-white`}
                         >
                             Continuar

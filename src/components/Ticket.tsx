@@ -43,7 +43,6 @@ export default function Ticket({ name, allotment, value, onChange }: TicketProps
             <IoIosAddCircle />
           </div>
         </div>
-
       </div>
       <div className="border-t-2 border-dashed border-slate-300 w-full"></div>
     </>
