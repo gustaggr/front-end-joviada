@@ -92,6 +92,9 @@ export default function NavBar() {
                 <Link to={'/person'} className="flex flex-col items-center">
                     {location.pathname === '/person' ? <IoPerson size={'30px'} className="text-primary" /> : <IoPersonOutline size={'30px'} />}
                 </Link>
+                <Link to={'/login'} className="flex flex-col items-center">
+                    {location.pathname === '/login' ? <IoPerson size={'30px'} className="text-primary" /> : <IoPersonOutline size={'10px'} />}
+                </Link>
             </div>
 
             {/* Overlay para fechar o dropdown ao clicar fora */}
