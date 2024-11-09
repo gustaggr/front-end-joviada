@@ -16,7 +16,7 @@ export default function MyTickets() {
             <NavBar />
             <div className="max-sm:h-screen">
                 <div className="flex flex-col justify-center items-center py-5">
-                    <div className="flex max-w-[1200px] max-wi:px-4 text-lg w-full gap-1">Meu Perfil / <h1 className="font-semibold">Meus Ingressos</h1></div>
+                    <div className="flex max-w-[1200px]  max-sm:flex-col max-wi:px-4 text-lg w-full gap-1">Meu Perfil / <h1 className="font-semibold">Meus Ingressos</h1></div>
                 </div>
                 <div className="w-full justify-center items-center flex">
                     <div className="w-full max-w-[1200px] max-wi:px-4 gap-4 flex flex-row">
@@ -41,7 +41,7 @@ export default function MyTickets() {
                             </div>
                         </div>
 
-                        <div className="w-full bg-white flex shadow-slate-300 shadow-md backdrop-blur-sm rounded-lg flex-col gap-5 p-8">
+                        <div className="w-full bg-white flex shadow-slate-300 shadow-md backdrop-blur-sm rounded-lg flex-col mb-20 gap-5 p-8">
                             <div className="flex gap-2 items-center">
                                 <hr className="h-6 border bg-primary border-primary w-1" />
                                 <h1 className="text-black font-bold text-xl">Meus Ingressos</h1>
@@ -54,8 +54,8 @@ export default function MyTickets() {
                                 </div>
                             ) : (
                                 <div className="w-full flex items-center justify-center flex-col gap-3">
-                                    <Link to={'/ticket'} className="flex justify-between items-center w-full bg-background rounded-lg p-4 gap-5">
-                                        <div className="flex gap-5 items-center">
+                                    <Link to={'/ticket'} className="flex justify-between max-sm:flex-col max-sm:justify-center items-center w-full bg-background rounded-lg p-4 gap-5">
+                                        <div className="flex max-sm:flex-col max-sm:justify-center  gap-5 items-center">
                                             <IoTicket className="text-green-400" size={'40px'} />
                                             <div>
                                                 <h1 className="font-light">Nome do participante:</h1>
@@ -71,8 +71,8 @@ export default function MyTickets() {
                                             <h1 className="text-green-400">Aprovado</h1>
                                         </div>
                                     </Link>
-                                    <Link to={'/ticket'} className="flex justify-between items-center w-full bg-background rounded-lg p-4 gap-5">
-                                        <div className="flex gap-5 items-center">
+                                    <Link to={'/ticket'} className="flex justify-between  max-sm:flex-col max-sm:justify-center  items-center w-full bg-background rounded-lg p-4 gap-5">
+                                        <div className="flex gap-5  max-sm:flex-col items-center">
                                             <IoTicket className="text-red-400" size={'40px'} />
                                             <div>
                                                 <h1 className="font-light">Nome do participante:</h1>
@@ -86,23 +86,6 @@ export default function MyTickets() {
                                         <div className="flex gap-1">
                                             <h1 className="font-light">Status:</h1>
                                             <h1 className="text-red-400">Recusado</h1>
-                                        </div>
-                                    </Link>
-                                    <Link to={'/ticket'} className="flex justify-between items-center w-full bg-background rounded-lg p-4 gap-5">
-                                        <div className="flex gap-5 items-center">
-                                            <IoTicket className="text-orange-400" size={'40px'} />
-                                            <div>
-                                                <h1 className="font-light">Nome do participante:</h1>
-                                                <h1>Jhon Doe</h1>
-                                            </div>
-                                            <div>
-                                                <h1 className="font-light">Tipo de entrada:</h1>
-                                                <h1>Inscrição Geral - Inteira</h1>
-                                            </div>
-                                        </div>
-                                        <div className="flex gap-1">
-                                            <h1 className="font-light">Status:</h1>
-                                            <h1 className="text-orange-400">Pendente</h1>
                                         </div>
                                     </Link>
                                 </div>

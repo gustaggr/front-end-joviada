@@ -22,7 +22,7 @@ export default function Card({
     return (
         <Link 
             to="/event" 
-            className="w-[320px] h-full bg-backgroundClear flex flex-col rounded-2xl shadow-slate-400 shadow-md backdrop-blur-sm"
+            className="w-[320px] h-full bg-backgroundClear max-mb:w-full flex flex-col rounded-2xl shadow-slate-400 shadow-md backdrop-blur-sm"
         >
             <img
                 src={image}

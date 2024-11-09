@@ -12,8 +12,12 @@ export default function Register() {
             <NavBar />
             <div className="w-full h-full justify-center flex-col items-center flex p-4 mt-10">
                 <div className="flex flex-col max-w-[600px] w-full items-start gap-8">
-                    <div className="flex flex-col">
-                    <h1 className="text-black font-bold text-lg">Crie uma conta</h1>
+                <div className="flex  flex-col">
+                        <h1 className="text-black font-bold text-lg">Crie sua conta</h1>
+                        <Link className="flex gap-1 max-mb:flex-col" to={'/login'}>
+                            Já possui uma conta?
+                            <h1 className="underline text-primary">Entre agora mesmo!</h1>
+                        </Link>
                     </div>
                     <div className="flex flex-col gap-4 w-full">
                         <h2 className="text-black text-sm flex gap-1 font-normal">Nome Completo<h3 className="text-red-500">*</h3></h2>
@@ -35,7 +39,7 @@ export default function Register() {
                             >
                                 {checked && <FaCheck size={12} />} {/* Ícone de check aparece apenas quando marcado */}
                             </div>
-                            <span onClick={toggleCheckbox} className="text-gray-800">Aceito os <Link className="underline underline-offset-2 text-primary outline-primary" to={'/termos'}>termos</Link></span>
+                            <span onClick={toggleCheckbox} className="text-gray-800">Eu li e aceito os <Link className="underline underline-offset-2 text-primary outline-primary" to={'/terms'}>Termos de Serviço</Link> e a <Link className="underline underline-offset-2 text-primary outline-primary" to={'/policy'}>Política de Privacidade</Link>.<h3 className="text-red-500">*</h3></span>
                             
                         </label>
                     </div>

@@ -7,6 +7,9 @@ import NotFound from './pages/NotFound';
 import MyTickets from './pages/dash/client/MyTickets';
 import MyPerson from './pages/dash/client/MyPerson';
 import MyTicket from './pages/dash/client/MyTicket';
+import HomeAdmn from './pages/dash/admin/HomeAdm';
+import Terms from './pages/Terms';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 
 // Lazy Loading das páginas
 const Home = lazy(() => import('./pages/Home'));
@@ -26,6 +29,9 @@ function App() {
             <Route path="/person" element={<MyPerson />} />
             <Route path="/tickets" element={<MyTickets />} />
             <Route path="/ticket" element={<MyTicket />} />
+            <Route path="/admin" element={<HomeAdmn />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/policy" element={<PrivacyPolicy />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>

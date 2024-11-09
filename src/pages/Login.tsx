@@ -14,7 +14,7 @@ export default function Login() {
                 <div className="flex flex-col max-w-[600px] w-full items-start gap-8">
                     <div className="flex  flex-col">
                         <h1 className="text-black font-bold text-lg">Acesse sua conta</h1>
-                        <Link className="flex gap-1 max-mb:flex-col" to={'/termos'}>
+                        <Link className="flex gap-1 max-mb:flex-col" to={'/register'}>
                             Não possui uma conta?
                             <h1 className="underline text-primary">Crie agora mesmo!</h1>
                         </Link>
