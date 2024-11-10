@@ -1,23 +1,32 @@
 import { IoCloseOutline, IoPerson, IoTicketOutline } from "react-icons/io5";
 import NavBar from "../../../components/NavBar";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import Modal from "react-modal";
 import toast, { Toaster } from "react-hot-toast";
+import useUserStore from "../../../store/useUserStore";
 
 Modal.setAppElement("#root");
 
 export default function MyPerson() {
-    const [modalIsOpen, setModalIsOpen] = useState(false);
-    const [currentPassword, setCurrentPassword] = useState("");
-    const [newPassword, setNewPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
-    const [nameuser, setnameuser] = useState('Gustavo');
-    const [email, setemail] = useState('gustavo@gmail.com');
-    const [tempName, setTempName] = useState(nameuser);  // Armazenando temporariamente o novo nome
-    const [tempEmail, setTempEmail] = useState(email);  // Armazenando temporariamente o novo email
+    const {
+        modalIsOpen,
+        currentPassword,
+        newPassword,
+        confirmPassword,
+        nameuser,
+        tempName,
+        tempEmail,
+        setModalIsOpen,
+        setCurrentPassword,
+        setNewPassword,
+        setConfirmPassword,
+        setNameUser,
+        setEmail,
+        setTempName,
+        setTempEmail,
+    } = useUserStore();
 
-    const correctCurrentPassword = "1234"; // Senha atual para verificação
+    const correctCurrentPassword = "1234";
 
     function openModal(event: { preventDefault: () => void; }) {
         event.preventDefault();
@@ -25,9 +34,8 @@ export default function MyPerson() {
     }
 
     function updateData(e: React.FormEvent) {
-        e.preventDefault(); // Previne o comportamento padrão de submit do formulário
+        e.preventDefault();
 
-        // Validação de campos
         if (tempName === "" && tempEmail === "") {
             toast.error("Nome e email estão em branco");
         } else {
@@ -37,9 +45,8 @@ export default function MyPerson() {
             if (tempEmail === "") {
                 toast.error("Email em branco");
             } else {
-                // Atualiza permanentemente os dados
-                setnameuser(tempName);
-                setemail(tempEmail);
+                setNameUser(tempName);
+                setEmail(tempEmail);
                 toast.success("Dados atualizados com sucesso!");
             }
         }
@@ -53,20 +60,17 @@ export default function MyPerson() {
     }
 
     function handlePasswordChange() {
-        // Verificar se a senha atual está correta
         if (currentPassword !== correctCurrentPassword) {
             toast.error("Senha atual incorreta.");
             setCurrentPassword("");
             return;
         }
 
-        // Verificar se as novas senhas coincidem
         if (newPassword !== confirmPassword) {
             toast.error("As senhas não coincidem.");
             return;
         }
 
-        // Lógica para atualizar a senha, se necessário
         closeModal();
         toast.success("Senha alterada com sucesso!");
     }

@@ -10,6 +10,7 @@ import MyTicket from './pages/dash/client/MyTicket';
 import HomeAdmn from './pages/dash/admin/HomeAdm';
 import Terms from './pages/Terms';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import TicketsAdm from './pages/dash/admin/TicketsAdm';
 
 // Lazy Loading das páginas
 const Home = lazy(() => import('./pages/Home'));
@@ -26,13 +27,21 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/order" element={<Order />} />
+
+            {/* Rotas do Painel CLIENTE */}
             <Route path="/person" element={<MyPerson />} />
             <Route path="/tickets" element={<MyTickets />} />
             <Route path="/ticket" element={<MyTicket />} />
-            <Route path="/admin" element={<HomeAdmn />} />
+
+             {/* Rotas dos TERMOS */}
             <Route path="/terms" element={<Terms />} />
             <Route path="/policy" element={<PrivacyPolicy />} />
             <Route path="*" element={<NotFound />} />
+
+            {/* Rotas do Painel ADM */}
+            <Route path="/admin/" element={<HomeAdmn />} />
+            <Route path="/admin/tickets" element={<TicketsAdm />} />
+            <Route path="/admin/*" element={<NotFound />} />
           </Routes>
         </div>
       </Suspense>

@@ -1,26 +1,11 @@
-import { useState } from 'react';
 import { IoHomeOutline, IoHome, IoTicketOutline, IoTicket, IoPersonOutline, IoPerson, IoChevronDown } from 'react-icons/io5';
 import { Link, useLocation } from "react-router-dom";
+import useUserStore from "../store/useUserStore";
+import useNavBarStore from "../store/useNavBarStore";
 
 export default function NavBar() {
-    const [hasLogged, setHasLogged] = useState(false);
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const [hasAdmin, setIsAdmin] = useState(false);
-
-    const nameuser = 'Gustavo';
-
-    const toggleAdmin = () => {
-        setIsAdmin((prev) => !prev);
-    }
-
-    const toggleLogin = () => {
-        setHasLogged((prev) => !prev);
-        setIsDropdownOpen(false);
-    };
-
-    const toggleDropdown = () => {
-        setIsDropdownOpen((prev) => !prev);
-    };
+    const { nameuser } = useUserStore(); // Importando o nameuser da store
+    const { hasLogged, isDropdownOpen, hasAdmin, toggleLogin, toggleDropdown, toggleAdmin } = useNavBarStore(); // Importando o estado e funções da store da NavBar
 
     const userInitial = nameuser.charAt(0).toUpperCase();
     const location = useLocation();
@@ -30,7 +15,9 @@ export default function NavBar() {
             <div className="w-full z-10 bg-backgroundClear h-16 items-center justify-center flex px-5">
                 <div className="text-black w-full items-center justify-between flex max-w-[1200px]">
                     <div>
-                        <Link to={'/'} className="font-bold text-black text-xl"><img className="w-52" src='/namelogo.svg' alt="Logo" /></Link>
+                        <Link to={'/'} className="font-bold text-black text-xl">
+                            <img className="w-52" src='/namelogo.svg' alt="Logo" />
+                        </Link>
                     </div>
                     <div className="gap-4 max-xl:pr-4 items-center font-medium text-base hidden sm:flex">
                         <button onClick={toggleLogin} className="bg-primary p-2 text-white rounded-lg hover:bg-purple-600 hover:text-white hover:scale-105 ease-in-out duration-300">
@@ -93,7 +80,7 @@ export default function NavBar() {
                     {location.pathname === '/person' ? <IoPerson size={'30px'} className="text-primary" /> : <IoPersonOutline size={'30px'} />}
                 </Link>
                 <Link to={'/login'} className="flex flex-col items-center">
-                    {location.pathname === '/login' ? <IoPerson size={'30px'} className="text-primary" /> : <IoPersonOutline size={'10px'} />}
+                    {location.pathname === '/login' ? <IoPerson size={'10px'} className="text-primary" /> : <IoPersonOutline size={'10px'} />}
                 </Link>
             </div>
 
@@ -101,7 +88,7 @@ export default function NavBar() {
             {isDropdownOpen && (
                 <div
                     className="fixed inset-0 z-0"
-                    onClick={() => setIsDropdownOpen(false)}
+                    onClick={() => toggleDropdown()}
                 />
             )}
         </>

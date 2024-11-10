@@ -1,4 +1,4 @@
-import { IoPerson, IoTicket, IoTicketOutline } from "react-icons/io5";
+import {  IoPersonOutline, IoTicket } from "react-icons/io5";
 import NavBar from "../../../components/NavBar";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -27,11 +27,11 @@ export default function MyTickets() {
                             </div>
                             <div className="flex w-full justify-center items-center flex-col gap-2">
                                 <Link to={`/person`} className="flex w-full gap-3 rounded-full p-3 justify-center font-light items-center  text-black hover:bg-bgprimary hover:scale-[1.02] ease-in-out duration-300">
-                                    <IoPerson size={'25px'} />
+                                    <IoPersonOutline size={'25px'} />
                                     <h1>Meus Dados</h1>
                                 </Link>
                                 <Link to={`#`} className="flex w-full gap-3 rounded-full p-3 justify-center font-light items-center bg-bgprimary text-primary hover:bg-bghover hover:scale-[1.02] ease-in-out duration-300">
-                                    <IoTicketOutline className="text-primary" size={'25px'} />
+                                    <IoTicket className="text-primary" size={'25px'} />
                                     <h1>Ingressos</h1>
                                 </Link>
 
