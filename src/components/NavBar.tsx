@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { IoHomeOutline, IoHome, IoTicketOutline, IoTicket, IoPersonOutline, IoPerson, IoChevronDown } from 'react-icons/io5';
 import { Link, useLocation } from "react-router-dom";
 import useUserStore from "../store/useUserStore";
@@ -9,6 +10,24 @@ export default function NavBar() {
 
     const userInitial = nameuser.charAt(0).toUpperCase();
     const location = useLocation();
+
+    const dropdownRef = useRef(null);
+
+    // Fechar o dropdown se o clique for fora dele
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (dropdownRef.current && !(dropdownRef.current as any).contains(event.target)) {
+                if (isDropdownOpen) {
+                    toggleDropdown();
+                }
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [isDropdownOpen, toggleDropdown]);
 
     return (
         <>
@@ -29,7 +48,7 @@ export default function NavBar() {
                             </button>
                         )}
                         {hasLogged ? (
-                            <div className="relative gap-2 ">
+                            <div className="relative gap-2 " ref={dropdownRef}>
                                 {/* Ícone do usuário com a inicial e a seta */}
                                 <button
                                     onClick={toggleDropdown}
@@ -81,6 +100,9 @@ export default function NavBar() {
                 </Link>
                 <Link to={'/login'} className="flex flex-col items-center">
                     {location.pathname === '/login' ? <IoPerson size={'10px'} className="text-primary" /> : <IoPersonOutline size={'10px'} />}
+                </Link>
+                <Link to={'/admin/'} className="flex flex-col items-center">
+                    {location.pathname === '/admin/' ? <IoPerson size={'10px'} className="text-primary" /> : <IoPersonOutline size={'10px'} />}
                 </Link>
             </div>
 

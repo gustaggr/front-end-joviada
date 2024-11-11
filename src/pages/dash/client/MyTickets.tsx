@@ -71,7 +71,7 @@ export default function MyTickets() {
                                             <h1 className="text-green-400">Aprovado</h1>
                                         </div>
                                     </Link>
-                                    <Link to={'/ticket'} className="flex justify-between  max-sm:flex-col max-sm:justify-center  items-center w-full bg-background rounded-lg p-4 gap-5">
+                                    <div className="flex justify-between  max-sm:flex-col max-sm:justify-center  items-center w-full bg-background rounded-lg p-4 gap-5">
                                         <div className="flex gap-5  max-sm:flex-col items-center">
                                             <IoTicket className="text-red-400" size={'40px'} />
                                             <div>
@@ -87,7 +87,7 @@ export default function MyTickets() {
                                             <h1 className="font-light">Status:</h1>
                                             <h1 className="text-red-400">Recusado</h1>
                                         </div>
-                                    </Link>
+                                    </div>
                                 </div>
                             )}
                         </div>

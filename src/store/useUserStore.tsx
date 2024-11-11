@@ -1,6 +1,8 @@
-import {create} from 'zustand';
+import { create } from 'zustand';
 
 interface UserState {
+  faltam: number;  // Adicionado o estado faltam
+  isMenuOpen: boolean;
   modalIsOpen: boolean;
   currentPassword: string;
   newPassword: string;
@@ -9,6 +11,8 @@ interface UserState {
   email: string;
   tempName: string;
   tempEmail: string;
+  setFaltam: (value: number) => void; // Função para atualizar o estado faltam
+  setIsMenuOpen: (isOpenMenu: boolean) => void;
   setModalIsOpen: (isOpen: boolean) => void;
   setCurrentPassword: (password: string) => void;
   setNewPassword: (password: string) => void;
@@ -20,6 +24,9 @@ interface UserState {
 }
 
 const useUserStore = create<UserState>((set) => ({
+  faltam: 0,  // Inicializando faltam
+  setFaltam: (value) => set({ faltam: value }), // Função que atualiza faltam
+  isMenuOpen: false,
   modalIsOpen: false,
   currentPassword: '',
   newPassword: '',
@@ -28,6 +35,7 @@ const useUserStore = create<UserState>((set) => ({
   email: 'gustavo@gmail.com',
   tempName: 'Gustavo',
   tempEmail: 'gustavo@gmail.com',
+  setIsMenuOpen: (isOpenMenu) => set({ isMenuOpen: isOpenMenu }),
   setModalIsOpen: (isOpen) => set({ modalIsOpen: isOpen }),
   setCurrentPassword: (password) => set({ currentPassword: password }),
   setNewPassword: (password) => set({ newPassword: password }),
