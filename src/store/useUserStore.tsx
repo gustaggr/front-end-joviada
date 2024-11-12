@@ -4,6 +4,7 @@ interface UserState {
   faltam: number;  // Adicionado o estado faltam
   isMenuOpen: boolean;
   modalIsOpen: boolean;
+  addModalIsOpen: boolean;
   currentPassword: string;
   newPassword: string;
   confirmPassword: string;
@@ -13,6 +14,7 @@ interface UserState {
   tempEmail: string;
   setFaltam: (value: number) => void; // Função para atualizar o estado faltam
   setIsMenuOpen: (isOpenMenu: boolean) => void;
+  setAddModalIsOpen: (addModalIsOpen: boolean) => void;
   setModalIsOpen: (isOpen: boolean) => void;
   setCurrentPassword: (password: string) => void;
   setNewPassword: (password: string) => void;
@@ -35,6 +37,8 @@ const useUserStore = create<UserState>((set) => ({
   email: 'gustavo@gmail.com',
   tempName: 'Gustavo',
   tempEmail: 'gustavo@gmail.com',
+  addModalIsOpen: false,
+  setAddModalIsOpen: (isOpen) => set({ addModalIsOpen: isOpen }),
   setIsMenuOpen: (isOpenMenu) => set({ isMenuOpen: isOpenMenu }),
   setModalIsOpen: (isOpen) => set({ modalIsOpen: isOpen }),
   setCurrentPassword: (password) => set({ currentPassword: password }),

@@ -35,7 +35,7 @@ export default function HomeAdmn() {
                             Olá, {nameuser}
                         </div>
                     </div>
-                    {/* Ajustando para grid responsivo */}
+                    
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                         <div className="w-full bg-white h-full p-3 rounded-xl gap-1 flex">
                             <div className="flex flex-col gap-3">
