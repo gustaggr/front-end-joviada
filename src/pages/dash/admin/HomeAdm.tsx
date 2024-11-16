@@ -10,7 +10,7 @@ export default function HomeAdmn() {
     const total = "10.350,00";
     const tickets = "96";
     const pending = "7";
-    const targetDate = new Date('2024-12-14T23:59:59');
+    const targetDate = new Date('2024-12-01T23:59:59');
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -24,7 +24,7 @@ export default function HomeAdmn() {
         }, 1000);
 
         return () => clearInterval(interval);
-    }, []);
+    });
 
     return (
         <div className="min-h-screen min-w-screen bg-background">

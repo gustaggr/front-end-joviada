@@ -10,7 +10,12 @@ import MyTicket from './pages/dash/client/MyTicket';
 import HomeAdmn from './pages/dash/admin/HomeAdm';
 import Terms from './pages/Terms';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import EventsAdm from './pages/dash/admin/EventsAdm';
+import NotFoundAdm from './pages/dash/admin/NotFoundAdm';
+import RegistrarionsAdm from './pages/dash/admin/RegistrationsAdm';
 import TicketsAdm from './pages/dash/admin/TicketsAdm';
+import UsersAdm from './pages/dash/admin/UsersAdm';
+import CouponsAdm from './pages/dash/admin/CouponsAdm';
 
 // Lazy Loading das páginas
 const Home = lazy(() => import('./pages/Home'));
@@ -40,8 +45,12 @@ function App() {
 
             {/* Rotas do Painel ADM */}
             <Route path="/admin/" element={<HomeAdmn />} />
-            <Route path="/admin/tickets" element={<TicketsAdm />} />
-            <Route path="/admin/*" element={<NotFound />} />
+            <Route path="/admin/events" element={<EventsAdm />} />
+            <Route path="/admin/registrations" element={<RegistrarionsAdm />} />
+            <Route path="/admin/*" element={<NotFoundAdm />} />
+            <Route path="/admin/tickets" element={<TicketsAdm/>} />
+            <Route path="/admin/users" element={<UsersAdm/>} />
+            <Route path="/admin/coupons" element={<CouponsAdm/>} />
           </Routes>
         </div>
       </Suspense>

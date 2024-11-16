@@ -2,8 +2,26 @@ import { IoDownloadOutline } from "react-icons/io5";
 import NavBar from "../../../components/NavBar";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import QRCode from "qrcode"; // Biblioteca qrcode
+import React from "react";
 
 export default function MyTicket() {
+    const nameticket = "John Doe";
+    const idticket = "13UIID23D"
+    const qrCodeURL = `http://localhost/ticket/${idticket}`;
+
+    const generateQRCode = async () => {
+        try {
+            const qrCodeCanvas = document.getElementById("qrcode-canvas");
+            if (qrCodeCanvas) {
+                await QRCode.toCanvas(qrCodeCanvas, qrCodeURL, {
+                    width: 160,
+                });
+            }
+        } catch (err) {
+            console.error("Erro ao gerar QR Code:", err);
+        }
+    };
 
     const downloadPDF = () => {
         const ticketElement = document.getElementById("ticket");
@@ -19,16 +37,24 @@ export default function MyTicket() {
 
                 // Adicionando a imagem com proporção correta e margem
                 pdf.addImage(imgData, "PNG", margin, margin, pdfWidth, pdfHeight);
-                pdf.save("ingresso.pdf");
+                pdf.save(`Ingresso - ${nameticket}.pdf`);
             });
         }
     };
+
+    // Gera o QR Code após renderizar o componente
+    React.useEffect(() => {
+        generateQRCode();
+    }, []);
+
     return (
         <div className="bg-background w-screen min-h-screen">
             <NavBar />
             <div className="justify-center items-center flex flex-col h-sc max-wi:p-3">
                 <div className="flex flex-col justify-start max-w-[1200px] items-start w-full py-5">
-                    <div className="flex max-w-[1200px] max-wi:px-4 text-lg w-full gap-1">Meu Perfil / <h1 className="font-semibold">Meus Ingressos</h1></div>
+                    <div className="flex max-w-[1200px] max-wi:px-4 text-lg w-full gap-1">
+                        Meu Perfil / <h1 className="font-semibold">Meus Ingressos</h1>
+                    </div>
                 </div>
                 {/* Ingresso */}
                 <div id="ticket" className="w-full justify-center items-center flex flex-col max-w-[1200px] rounded-md bg-white p-3">
@@ -70,13 +96,14 @@ export default function MyTicket() {
                     <div className="border-t-2 border-black w-full"></div>
                     <div className="flex justify-between w-full min-sm:px-8">
                         <div className="flex flex-col items-start justify-center text-sm">
-                            <img className="w-40" src="/qrcode.jpeg" alt="QR Code" />
+                            {/* Canvas para QR Code */}
+                            <canvas id="qrcode-canvas"></canvas>
                         </div>
                         <div className="flex flex-col w-full items-start py-8 justify-center text-sm p-3">
                             <h1>Pedido:</h1>
-                            <h2 className="font-light">12341</h2>
+                            <h2 className="font-light">{idticket}</h2>
                             <h1>Portador:</h1>
-                            <h2 className="font-light">Jhon Doe</h2>
+                            <h2 className="font-light">{nameticket}</h2>
                         </div>
                     </div>
                 </div>

@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import NavBar from '../components/NavBar';
 import { IoCalendarClearOutline, IoLocationOutline } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
+import InputMask from 'react-input-mask'
 
 const Order: React.FC = () => {
     const [timeLeft, setTimeLeft] = useState(2 * 60); // 15 minutos em segundos
-    const [phone, setPhone] = useState("");
 
     useEffect(() => {
         if (timeLeft <= 0) return; // Interrompe o cronômetro ao chegar a 0
@@ -16,19 +16,6 @@ const Order: React.FC = () => {
 
         return () => clearInterval(intervalId); // Limpa o intervalo ao desmontar o componente
     }, [timeLeft]);
-
-    const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        let value = e.target.value.replace(/\D/g, ""); // Remove tudo que não é número
-
-        if (value.length > 0) {
-            value = `(${value.substring(0, 2)}) ` + value.substring(2);
-        }
-        if (value.length > 10) {
-            value = value.substring(0, 10) + "-" + value.substring(10, 14);
-        }
-
-        setPhone(value);
-    };
 
     const formatTime = (seconds: number) => {
         const minutes = Math.floor(seconds / 60);
@@ -162,13 +149,12 @@ const Order: React.FC = () => {
                                 <h2 className="text-black text-sm flex gap-1 font-normal">
                                     Telefone<h3 className="text-red-500">*</h3>
                                 </h2>
-                                <input
+                                <InputMask
+                                    mask="(99) 99999-9999"
                                     required
                                     type="text"
                                     className="w-full text-lg p-2 bg-background rounded-xl outline-none placeholder:text-slate-600 text-black"
                                     placeholder="(34) 9xxxx-xxxx"
-                                    value={phone}
-                                    onChange={handlePhoneChange}
                                 />
                             </div>
                             <div className="flex flex-col gap-2 sm:w-1/2">

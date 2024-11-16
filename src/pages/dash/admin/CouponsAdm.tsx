@@ -5,39 +5,14 @@ import { useState } from "react";
 import { IoCloseOutline } from "react-icons/io5";
 import 'react-quill/dist/quill.snow.css';
 
-export default function TicketsAdm() {
+export default function CouponsAdm() {
     const [modalIsOpen, setModalIsOpen] = useState(false);
-    const [value, setValue] = useState<string>("");
-
-    const handleValue = (event: React.ChangeEvent<HTMLInputElement>) => {
-        let inputValue = event.target.value;
-
-        // Remove caracteres não numéricos, exceto para a vírgula
-        inputValue = inputValue.replace(/[^\d]/g, "");
-
-        // Se o valor estiver vazio, apenas reseta o campo
-        if (!inputValue) {
-            setValue("");
-            return;
-        }
-
-        // Se o valor for maior que 2 dígitos, separa os dois últimos dígitos como centavos
-        const reais = inputValue.slice(0, -2); // Parte inteira
-        const centavos = inputValue.slice(-2); // Parte decimal
-        inputValue = `${reais},${centavos}`;
-
-
-        // Formatar o valor com "R$" na frente
-        setValue(`R$ ${inputValue}`);
-    };
-
-
     const closeModal = () => setModalIsOpen(false);
     const openModal = () => setModalIsOpen(true);
 
     const data = [
-        { id: 1, name: "Inscrição Geral - Inteira", batch: "1º Lote", value: "R$ 200,00" },
-        { id: 1, name: "Inscrição Geral - Meia", batch: "1º Lote", value: "R$ 100,00" },
+        { id: 1, coupon: "50OFF", discount: "50%", expirationdate: "12/12/2024" },
+        { id: 2, coupon: "10OFF", discount: "10%", expirationdate: "14/12/2024" },
     ];
 
     return (
@@ -45,7 +20,7 @@ export default function TicketsAdm() {
             <SideBar>
                 <div className="flex flex-col w-full h-full gap-4">
                     <div className="max-sm:flex-col justify-between flex items-center max-sm:gap-2">
-                        <h1 className="font-semibold text-xl max-sm:w-full max-sm:text-start">Ingressos</h1>
+                        <h1 className="font-semibold text-xl max-sm:w-full max-sm:text-start">Cupons</h1>
                         <div className="flex gap-2 flex-row max-sm: justify-between max-sm:w-full">
                             <div
                                 className={`flex w-full items-center justify-between rounded-md bg-gray-50 border border-gray-200 p-1 px-2`}
@@ -74,17 +49,17 @@ export default function TicketsAdm() {
                                     </th>
                                     <th className="p-4 border-b border-slate-300 bg-slate-50">
                                         <p className="block text-sm font-normal leading-none text-slate-500">
-                                            Tipo
+                                            Codigo
                                         </p>
                                     </th>
                                     <th className="p-4 border-b border-slate-300 bg-slate-50">
                                         <p className="block text-sm font-normal leading-none text-slate-500">
-                                            Lote
+                                            Desconto
                                         </p>
                                     </th>
                                     <th className="p-4 border-b border-slate-300 bg-slate-50">
                                         <p className="block text-sm font-normal leading-none text-slate-500">
-                                            Valor
+                                            Duracao
                                         </p>
                                     </th>
                                     <th className="p-4 border-b justify-end flex border-slate-300 bg-slate-50">
@@ -101,14 +76,13 @@ export default function TicketsAdm() {
                                             <p className="block text-sm text-slate-800">{item.id}</p>
                                         </td>
                                         <td className="p-4 border-b border-slate-200">
-                                            <p className="block text-sm text-slate-800">{item.name}</p>
+                                            <p className="block text-sm text-slate-800">{item.coupon}</p>
                                         </td>
                                         <td className="p-4 border-b border-slate-200">
-                                            <p className="block text-sm text-slate-800">{item.batch}</p>
+                                            <p className="block text-sm text-slate-800">{item.discount}</p>
                                         </td>
-                                        
                                         <td className="p-4 border-b border-slate-200">
-                                            <p className="block text-sm text-slate-800">{item.value}</p>
+                                            <p className="block text-sm text-slate-800">{item.expirationdate}</p>
                                         </td>
                                         <td className="p-4 border-b pr-10 border-slate-200 justify-end flex">
                                             <div className="flex  gap-3 justify-center items-center">
@@ -132,7 +106,7 @@ export default function TicketsAdm() {
             >
                 <div className="bg-white font-lexend p-8 rounded-lg shadow-md w-[90%] max-w-md max-h-[80vh] overflow-y-auto">
                     <div className="flex justify-between">
-                        <h2 className="text-xl font-semibold mb-4">Adicionar Ingresso</h2>
+                        <h2 className="text-xl font-semibold mb-4">Adicionar Cupom</h2>
                         <IoCloseOutline className="cursor-pointer" onClick={closeModal} size={20} />
                     </div>
                     <div className="flex flex-col space-y-4">
@@ -140,40 +114,36 @@ export default function TicketsAdm() {
                         <div className="flex flex-col gap-2">
                             <div className="flex flex-col gap-2">
                                 <h2 className="text-black text-sm flex gap-1 font-normal">
-                                    Tipo do Ingresso<h3 className="text-red-500">*</h3>
+                                    Código de Desconto<h3 className="text-red-500">*</h3>
                                 </h2>
                                 <input
                                     required
                                     type="text"
                                     className="w-full text-lg p-2 bg-background rounded-xl outline-none placeholder:text-slate-600 text-black"
-                                    placeholder="John Doe"
+                                    placeholder="10OFF"
                                 />
                             </div>
                             <div className="flex flex-col gap-2">
                                 <h2 className="text-black text-sm flex gap-1 font-normal">
-                                    Lote<h3 className="text-red-500">*</h3>
-                                </h2>
-                                <select
-                                    required
-                                    className="w-full text-lg p-2 bg-background rounded-xl outline-none placeholder:text-slate-600 text-black"
-                                >
-                                    <option value="primarybatch">1º Lote</option>
-                                    <option value="secundarybatch">2º Lote</option>
-                                    <option value="thirdbatch">3º Lote</option>
-                                </select>
-                            </div>
-
-                            <div className="flex flex-col gap-2">
-                                <h2 className="text-black text-sm flex gap-1 font-normal">
-                                    Valor<h3 className="text-red-500">*</h3>
+                                    Porcentagem<h3 className="text-red-500">*</h3>
                                 </h2>
                                 <input
-                                    value={value}
-                                    onChange={handleValue}
                                     required
-                                    type="text"
+                                    maxLength={3}
+                                    max={100}
+                                    placeholder="10%"
+                                    type="number"
                                     className="w-full text-lg p-2 bg-background rounded-xl outline-none placeholder:text-slate-600 text-black"
-                                    placeholder="R$ 0,00"
+                                />
+                            </div>
+                            <div className="flex flex-col gap-2">
+                                <h2 className="text-black text-sm flex gap-1 font-normal">
+                                    Data de Expiração<h3 className="text-red-500">*</h3>
+                                </h2>
+                                <input
+                                    required
+                                    type="date"
+                                    className="w-full text-lg p-2 bg-background rounded-xl outline-none placeholder:text-slate-600 text-black"
                                 />
                             </div>
                         </div>
