@@ -45,7 +45,7 @@ export default function MyTicket() {
     // Gera o QR Code após renderizar o componente
     React.useEffect(() => {
         generateQRCode();
-    }, []);
+    });
 
     return (
         <div className="bg-background w-screen min-h-screen">
